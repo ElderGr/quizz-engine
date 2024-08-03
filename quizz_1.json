@@ -1,0 +1,12 @@
+{
+    "questions": [
+        {
+            "title": "What is the capital of France?",
+            "description": "",
+            "dificulty": "easy",
+            "type": "multiple",
+            "awnsers": [],
+            "correctAwnser": "Paris"
+        }
+    ]
+}
