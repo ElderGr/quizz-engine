@@ -1,22 +1,29 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { Home } from "../pages/home"
+import { QuizzPage } from "../pages/quizz"
+import { FeedbackPage } from "../pages/feedback"
+import { Provider } from "react-redux"
+import { store } from "../library/redux"
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
     {
         path: "/",
-        element: <div>Home</div>
+        element: <Home />
     },
     {
-        path: "/quizz",
-        element: <div>Quizz</div>
+        path: "/quizz/:id",
+        element: <QuizzPage />
     },
     {
-        path: "/result",
-        element: <div>Result</div>
+        path: "/quizz/:id/feedback",
+        element: <FeedbackPage />
     }
 ])
 
 export const Routes = () => {
     return (
-        <RouterProvider router={router} />
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
     )
 }
