@@ -14,9 +14,7 @@ export function FeedbackPage() {
     return (
         <div>
             <h1>Feedback Page</h1>
-            <div>{score.correct.length + score.incorrect.length}</div>
-            <div>{score.correct.length}</div>
-            <div>{score.incorrect.length}</div>
+            <div>{score.correct}</div>
 
             <Link to={'/'} onClick={onGoHomeClick}>
                 Go to home

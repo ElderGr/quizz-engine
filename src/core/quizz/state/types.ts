@@ -5,7 +5,11 @@ export interface QuizzReducer {
     selectedQuestion?: number;
     remaningQuestions: QuizzQuestion[];
     score: {
-        correct: string[];
-        incorrect: string[];
+        correct: number;
     }
+}
+
+export interface IConfirmAnswerAction {
+    awnsers: string[];
+    question: QuizzQuestion
 }

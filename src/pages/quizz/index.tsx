@@ -8,42 +8,64 @@ import { useNavigate } from "react-router"
 
 const renderQuizzAlternative = {
     [QuizzQuestionTypeEnum.ONE_CHOISE]: (
-        alternative: QuizzQuestionAlternative,
-        selectedAlternative: string | null,
-        onSelect: (alternative: string) => void
+        alternatives: QuizzQuestionAlternative[],
+        selectedAlternative: string[],
+        onSelect: React.Dispatch<React.SetStateAction<string[]>>
     ) => (
         <div>
-            <input 
-                type='radio'
-                name="alternatives"
-                onChange={() => onSelect(alternative.id)}
-                checked={selectedAlternative === alternative.id}
-            />
-            <label htmlFor="alternatives">{alternative.title}</label>
+            {alternatives.map((alternative) => (
+                <>
+                <input 
+                    type='radio'
+                    id={`alternative-${alternative.id}`}
+                    name="alternatives"
+                    onChange={() => onSelect([alternative.id])}
+                    checked={selectedAlternative[0] === alternative.id}
+                />
+                <label htmlFor={`alternative-${alternative.id}`}>{alternative.title}</label>
+                </>
+            ))}
         </div>
     ),
     [QuizzQuestionTypeEnum.MULTIPLE_CHOISE]: (
-        alternative: QuizzQuestionAlternative,
-        selectedAlternative: string | null,
-        onSelect: (alternative: string) => void
-    ) => (
-        <div>
-            <input 
-                type='checkbox'
-                id={`alternative-${alternative.id}`}
-                name="alternatives"
-                onChange={() => onSelect(alternative.id)} 
-                checked={selectedAlternative === alternative.id}
-            />
-            <label htmlFor={`alternative-${alternative.id}`}>{alternative.title}</label>
-        </div>
-    ),
-    [QuizzQuestionTypeEnum.INPUT_QUESTION]: (
-        alternative: QuizzQuestionAlternative,
-        selectedAlternative: string | null,
-        onSelect: (alternative: string) => void
+        alternatives: QuizzQuestionAlternative[],
+        selectedAlternative: string[],
+        onSelect: React.Dispatch<React.SetStateAction<string[]>>
+    ) => {
+        const toggleAlternative = (alternativeId: string) => {
+            const newSelectedAlternative = selectedAlternative.includes(alternativeId)
+                ? selectedAlternative.filter(id => id !== alternativeId)
+                : [...selectedAlternative, alternativeId]
+            onSelect(newSelectedAlternative)
+        }
 
-    ) => <input type='text' />
+        return (
+            <div>
+                {alternatives.map((alternative) => (
+                    <>
+                        <input 
+                            type='checkbox'
+                            id={`alternative-${alternative.id}`}
+                            name="alternatives"
+                            onChange={() => toggleAlternative(alternative.id)} 
+                            checked={selectedAlternative.includes(alternative.id)}
+                        />
+                        <label htmlFor={`alternative-${alternative.id}`}>{alternative.title}</label>
+                    </>
+                ))}
+            </div>
+        )
+    },
+    [QuizzQuestionTypeEnum.INPUT_QUESTION]: (
+        alternatives: QuizzQuestionAlternative[],
+        selectedAlternative: string[],
+        onSelect: React.Dispatch<React.SetStateAction<string[]>>
+
+    ) => <input 
+            type='text' 
+            onChange={(e) => onSelect([e.target.value])}
+            value={selectedAlternative[0]} 
+        />
 }
 
 export function QuizzPage() {
@@ -51,7 +73,7 @@ export function QuizzPage() {
     const selectedQuizz = useSelector(selectedQuizzSelector)
     const remaningQuestions = useSelector(remaningQuestionsSelector)
     const dispatch = useDispatch()
-    const [selectedAlternativeId, setSelectedAlternativeId] = useState<string | null>(null);
+    const [selectedAlternativeId, setSelectedAlternativeId] = useState<string[]>([]);
     const navigate = useNavigate()
 
 
@@ -62,10 +84,17 @@ export function QuizzPage() {
     useEffect(() => startTimer(), []);
 
     const onNextQuestion = () => {
-        const selectedAlternative = question?.alternatives.find(alternative => alternative.id === selectedAlternativeId)
-        if (selectedAlternative) dispatch(confirmAnswer(selectedAlternative))
+        if(!question) return
+        dispatch(confirmAnswer({
+            awnsers: selectedAlternativeId,
+            question: question
+        }))
         dispatch(nextQuestion())
+        setSelectedAlternativeId([])
         resetTimer()
+        if(remaningQuestions.length === 1){
+            onFinishQuizz()
+        }
     }
 
     const onFinishQuizz = () => {
@@ -87,21 +116,15 @@ export function QuizzPage() {
                     {!question || renderQuizzAlternative[question?.type] === undefined ? 
                         'No alternatives' 
                         :
-                        question?.alternatives.map(
-                            alternative => renderQuizzAlternative[question.type](
-                                alternative, 
-                                selectedAlternativeId,
-                                (id) => setSelectedAlternativeId(id)
-                            )
+                        renderQuizzAlternative[question.type](
+                            question.alternatives, 
+                            selectedAlternativeId,
+                            setSelectedAlternativeId
                         )
                     }
                 </div>
                 <div>
-                    {remaningQuestions.length !== 0 ? (
-                        <button onClick={onNextQuestion}>next question</button>
-                    ) : (
-                        <button onClick={onFinishQuizz}>finish quizz</button>
-                    )}
+                    <button onClick={onNextQuestion}>next question</button>
                 </div>
             </div>
         </div>

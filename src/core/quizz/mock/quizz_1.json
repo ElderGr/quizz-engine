@@ -8,7 +8,7 @@
             "imageSource": "",
             "description": "",
             "difficulty": "easy",
-            "type": "multiple_choise",
+            "type": "one_choise",
             "alternatives": [
                 {
                     "id": "a1",
@@ -43,7 +43,8 @@
                 {
                     "id": "a1",
                     "title": "Mars",
-                    "isAwnser": true
+                    "isAwnser": true,
+                    "weigth": 0.5
                 },
                 {
                     "id": "a2",
@@ -53,7 +54,8 @@
                 {
                     "id": "a3",
                     "title": "Jupiter",
-                    "isAwnser": false
+                    "isAwnser": true,
+                    "weigth": 0.5
                 },
                 {
                     "id": "a4",
@@ -68,238 +70,9 @@
             "imageSource": "",
             "description": "",
             "difficulty": "medium",
-            "type": "multiple_choise",
-            "alternatives": [
-                {
-                    "id": "a1",
-                    "title": "Elephant",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a2",
-                    "title": "Blue Whale",
-                    "isAwnser": true
-                },
-                {
-                    "id": "a3",
-                    "title": "Great White Shark",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a4",
-                    "title": "Giraffe",
-                    "isAwnser": false
-                }
-            ]
-        },
-        {
-            "id": "q4",
-            "title": "Which element has the chemical symbol 'O'?",
-            "imageSource": "",
-            "description": "",
-            "difficulty": "easy",
-            "type": "multiple_choise",
-            "alternatives": [
-                {
-                    "id": "a1",
-                    "title": "Oxygen",
-                    "isAwnser": true
-                },
-                {
-                    "id": "a2",
-                    "title": "Gold",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a3",
-                    "title": "Osmium",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a4",
-                    "title": "Oganesson",
-                    "isAwnser": false
-                }
-            ]
-        },
-        {
-            "id": "q5",
-            "title": "Which country is home to the kangaroo?",
-            "imageSource": "",
-            "description": "",
-            "difficulty": "easy",
-            "type": "multiple_choise",
-            "alternatives": [
-                {
-                    "id": "a1",
-                    "title": "Australia",
-                    "isAwnser": true
-                },
-                {
-                    "id": "a2",
-                    "title": "South Africa",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a3",
-                    "title": "India",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a4",
-                    "title": "Brazil",
-                    "isAwnser": false
-                }
-            ]
-        },
-        {
-            "id": "q6",
-            "title": "What is the smallest prime number?",
-            "imageSource": "",
-            "description": "",
-            "difficulty": "medium",
-            "type": "multiple_choise",
-            "alternatives": [
-                {
-                    "id": "a1",
-                    "title": "2",
-                    "isAwnser": true
-                },
-                {
-                    "id": "a2",
-                    "title": "1",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a3",
-                    "title": "3",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a4",
-                    "title": "5",
-                    "isAwnser": false
-                }
-            ]
-        },
-        {
-            "id": "q7",
-            "title": "What is the freezing point of water in Celsius?",
-            "imageSource": "",
-            "description": "",
-            "difficulty": "easy",
-            "type": "multiple_choise",
-            "alternatives": [
-                {
-                    "id": "a1",
-                    "title": "0°C",
-                    "isAwnser": true
-                },
-                {
-                    "id": "a2",
-                    "title": "100°C",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a3",
-                    "title": "32°C",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a4",
-                    "title": "50°C",
-                    "isAwnser": false
-                }
-            ]
-        },
-        {
-            "id": "q8",
-            "title": "What is the most abundant gas in the Earth's atmosphere?",
-            "imageSource": "",
-            "description": "",
-            "difficulty": "medium",
-            "type": "multiple_choise",
-            "alternatives": [
-                {
-                    "id": "a1",
-                    "title": "Oxygen",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a2",
-                    "title": "Carbon Dioxide",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a3",
-                    "title": "Nitrogen",
-                    "isAwnser": true
-                },
-                {
-                    "id": "a4",
-                    "title": "Argon",
-                    "isAwnser": false
-                }
-            ]
-        },
-        {
-            "id": "q9",
-            "title": "What is the hardest natural substance on Earth?",
-            "imageSource": "",
-            "description": "",
-            "difficulty": "medium",
-            "type": "multiple_choise",
-            "alternatives": [
-                {
-                    "id": "a1",
-                    "title": "Gold",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a2",
-                    "title": "Iron",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a3",
-                    "title": "Diamond",
-                    "isAwnser": true
-                },
-                {
-                    "id": "a4",
-                    "title": "Quartz",
-                    "isAwnser": false
-                }
-            ]
-        },
-        {
-            "id": "q10",
-            "title": "Which ocean is the largest?",
-            "imageSource": "",
-            "description": "",
-            "difficulty": "easy",
-            "type": "multiple_choise",
-            "alternatives": [
-                {
-                    "id": "a1",
-                    "title": "Atlantic",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a2",
-                    "title": "Pacific",
-                    "isAwnser": true
-                },
-                {
-                    "id": "a3",
-                    "title": "Indian",
-                    "isAwnser": false
-                },
-                {
-                    "id": "a4",
-                    "title": "Southern",
-                    "isAwnser": false
-                }
+            "type": "input_question",
+            "awnserKeywords": [
+                "Elephant"
             ]
         }
     ]

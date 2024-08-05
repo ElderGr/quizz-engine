@@ -24,11 +24,13 @@ export interface QuizzQuestion {
     difficulty: QuizzQuestionDifficultyEnum;
     type: QuizzQuestionTypeEnum;
     alternatives: QuizzQuestionAlternative[];
+    awnserKeywords: string[];
 }
 
 export interface QuizzQuestionAlternative {
     id: string;
     title: string;
     isAwnser: boolean;
+    weigth: number;
 }
 
