@@ -1763,6 +1763,11 @@ react-dom@^18.3.1:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
+react-icons@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-5.2.1.tgz#28c2040917b2a2eda639b0f797bff1888e018e4a"
+  integrity sha512-zdbW5GstTzXaVKvGSyTaBalt7HSfuK5ovrzlpyiWHAFXndXTdd/1hdDHI4xBM1Mn7YriT6aqESucFl9kEXzrdw==
+
 react-redux@^9.1.2:
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-9.1.2.tgz#deba38c64c3403e9abd0c3fbeab69ffd9d8a7e4b"
@@ -2142,6 +2147,11 @@ which@^2.0.1:
   integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   dependencies:
     isexe "^2.0.0"
+
+windstitch@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/windstitch/-/windstitch-0.3.0.tgz#ebb97d13098fca51286feee5b3103c681ad8b61d"
+  integrity sha512-xn48NPYKCcj8QHfn2/sQGF/zWRuHfSweRkUnSQnL6Szoyp7L2D6b+XbjlQY8FW8BIzc2Rq3ltx0Z5KpfFLyJkw==
 
 word-wrap@^1.2.5:
   version "1.2.5"
