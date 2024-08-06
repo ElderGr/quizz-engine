@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
-import { currentQuizzQuestionSelector, remaningQuestionsSelector, selectedQuizzSelector } from "../../core/quizz/state/selectors"
-import { useEffect, useState } from "react"
-import { useCountdown } from "../../shared/hooks/useCountdown"
+import { currentQuizzQuestionSelector, isLastQuestionSelector, selectedQuizzSelector } from "../../core/quizz/state/selectors"
+import { useState } from "react"
 import { QuizzQuestionAlternative, QuizzQuestionTypeEnum } from "../../core/quizz/types"
-import { confirmAnswer, nextQuestion } from "../../core/quizz/state/actions"
+import { confirmAnswer } from "../../core/quizz/state/actions"
 import { useNavigate } from "react-router"
 
 const renderQuizzAlternative = {
@@ -71,17 +70,11 @@ const renderQuizzAlternative = {
 export function QuizzPage() {
     const question = useSelector(currentQuizzQuestionSelector)
     const selectedQuizz = useSelector(selectedQuizzSelector)
-    const remaningQuestions = useSelector(remaningQuestionsSelector)
+    const isLastQuestion = useSelector(isLastQuestionSelector)
     const dispatch = useDispatch()
     const [selectedAlternativeId, setSelectedAlternativeId] = useState<string[]>([]);
     const navigate = useNavigate()
 
-
-    const { timeLeft, resetTimer, startTimer } = useCountdown({
-        initialTime: 300,
-    })
-
-    useEffect(() => startTimer(), []);
 
     const onNextQuestion = () => {
         if(!question) return
@@ -89,10 +82,8 @@ export function QuizzPage() {
             awnsers: selectedAlternativeId,
             question: question
         }))
-        dispatch(nextQuestion())
         setSelectedAlternativeId([])
-        resetTimer()
-        if(remaningQuestions.length === 1){
+        if(isLastQuestion){
             onFinishQuizz()
         }
     }
@@ -101,14 +92,11 @@ export function QuizzPage() {
         navigate(`/quizz/${selectedQuizz.id}/feedback`)
     }
 
-
     return (
         <div>
             <h1>Quizz Page</h1>
             <div>
                 <div>{question?.title}</div>
-                Time left: 
-                {`${Math.floor(timeLeft / 60)}`.padStart(2, '0')}:{`${timeLeft % 60}`.padStart(2, '0')}
                 <img src={question?.imageSource} />
                 <div>{question?.description}</div>
 

@@ -1,57 +1,62 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { clearQuestionState, confirmAnswer, nextQuestion, selectQuizz } from "./actions";
+import { clearQuestionState, confirmAnswer, selectQuizz } from "./actions";
 import { QuizzReducer } from "./types";
 import { QuizzQuestionTypeEnum } from "../types";
 
 const initialState: QuizzReducer = {
     selectedQuizz: {
         id: '',
+        tumbImage: '',
         title: '',
-        questions: [],
     },
-    remaningQuestions: [],
-    selectedQuestion: undefined,
-    score: {
-        correct: 0
-    }
+    questions: [],
+    userAwnsers: [],
+    selectedQuestion: 0,
 }
 
 export const quizzReducer = createReducer<QuizzReducer>(initialState, (builder) => {
     builder
         .addCase(selectQuizz, (state, action) => {
             state.selectedQuizz = action.payload
-            state.remaningQuestions = action.payload.questions;
-            const randomIndex = Math.floor(Math.random() * (state.remaningQuestions.length - 0 + 1)) + 0;
-
-            state.selectedQuestion = randomIndex
+            state.questions = action.payload.questions;
             
-            return state
-        })
-        .addCase(nextQuestion, (state) => {
-            if(state.selectedQuestion !== undefined){
-                state.remaningQuestions.splice(state.selectedQuestion, 1)
-            }
-            const randomIndex = Math.floor(Math.random() * state.remaningQuestions.length)
-            state.selectedQuestion = randomIndex
             return state
         })
         .addCase(confirmAnswer, (state, { payload: { awnsers, question } }) => {
             if(question.type === QuizzQuestionTypeEnum.ONE_CHOISE) {
-                const userGotRight = question.alternatives.find(alternative => awnsers.includes(alternative.id) && alternative.isAwnser)
-                if(userGotRight) {
-                    state.score.correct += 1
+                const nextQuestion = question.nextQuestion?.find(nextQuestion => nextQuestion.awnserMatch.includes(awnsers[0]))
+                if(nextQuestion) {
+                    const nextQuestionIndex = state.questions.findIndex(question => question.id === nextQuestion.questionId)
+                    state.selectedQuestion = nextQuestionIndex
+                }else{
+                    state.selectedQuestion += 1
                 }
             } else if (question.type === QuizzQuestionTypeEnum.MULTIPLE_CHOISE) {
-                const alternatives = question.alternatives.filter(alternative => awnsers.includes(alternative.id))
-                const scoreMade = alternatives.reduce((prev, curr) => prev + (curr.weigth ?? 0), 0)
-                state.score.correct += scoreMade
+                const nextQuestion = question.nextQuestion?.find(nextQuestion => {
+                    const isWrongMatch = nextQuestion.awnserMatch.some(awnserMatch => !awnsers.includes(awnserMatch))
+                    if(!isWrongMatch) return true
+                    return false
+                })
+                if(nextQuestion) {
+                    const nextQuestionIndex = state.questions.findIndex(question => question.id === nextQuestion.questionId)
+                    state.selectedQuestion = nextQuestionIndex
+                }else{
+                    state.selectedQuestion += 1
+                }                
             } else if (question.type === QuizzQuestionTypeEnum.INPUT_QUESTION) {
-                const userWords = awnsers[0].toLowerCase().split(' ');
-                const matchedKeywords = question.awnserKeywords.filter(keyword =>
-                  userWords.includes(keyword.toLowerCase())
-                );
-                state.score.correct += matchedKeywords.length / question.awnserKeywords.length;
+                if(question.nextQuestion !== undefined) {
+                    const nextQuestionId = question.nextQuestion[0].questionId
+                    const nextQuestionIndex = state.questions.findIndex(question => question.id === nextQuestionId)
+                    state.selectedQuestion = nextQuestionIndex
+                }else{
+                    state.selectedQuestion += 1
+                }
             }
+
+            state.userAwnsers.push({
+                questionId: question.id,
+                awnsers
+            })
 
             return state
         })

@@ -4,15 +4,10 @@ export enum QuizzQuestionTypeEnum {
     INPUT_QUESTION = 'input_question'
 }
 
-export enum QuizzQuestionDifficultyEnum {
-    EASY = 'easy',
-    MEDIUM = 'medium',
-    HARD = 'hard'
-}
-
 export interface Quizz {
     id: string;
     title: string;
+    tumbImage: string;
     questions: QuizzQuestion[]
 }
 
@@ -21,16 +16,16 @@ export interface QuizzQuestion {
     title: string;
     imageSource: string;
     description: string;
-    difficulty: QuizzQuestionDifficultyEnum;
     type: QuizzQuestionTypeEnum;
     alternatives: QuizzQuestionAlternative[];
-    awnserKeywords: string[];
+    nextQuestion?: {
+        awnserMatch: string[]
+        questionId: string
+    }[];
 }
 
 export interface QuizzQuestionAlternative {
     id: string;
     title: string;
-    isAwnser: boolean;
-    weigth: number;
 }
 

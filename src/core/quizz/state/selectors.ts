@@ -5,8 +5,9 @@ export const quizzSelector = (state: IRootState) => state.quizz
 
 export const selectedQuizzSelector = createSelector(quizzSelector, (quizz) => quizz.selectedQuizz)
 export const currentQuizzQuestionSelector = createSelector(quizzSelector, (quizz) => {
-    return quizz.selectedQuestion !== undefined ? quizz.remaningQuestions[quizz.selectedQuestion] : undefined
+    return quizz.selectedQuestion !== undefined ? quizz.questions[quizz.selectedQuestion] : undefined
 })
 
-export const remaningQuestionsSelector = createSelector(quizzSelector, (quizz) => quizz.remaningQuestions) 
-export const getQuizzScore = createSelector(quizzSelector, (quizz) => quizz.score)
+export const isLastQuestionSelector = createSelector(quizzSelector, (quizz) => {
+    return !quizz.questions[quizz.selectedQuestion + 1]
+})

@@ -12,23 +12,27 @@
             "alternatives": [
                 {
                     "id": "a1",
-                    "title": "Paris",
-                    "isAwnser": false
+                    "title": "Paris"
                 },
                 {
                     "id": "a2",
-                    "title": "London",
-                    "isAwnser": false
+                    "title": "London"
                 },
                 {
                     "id": "a3",
-                    "title": "Berlin",
-                    "isAwnser": true
+                    "title": "Berlin"
+                    
                 },
                 {
                     "id": "a4",
-                    "title": "Madrid",
-                    "isAwnser": false
+                    "title": "Madrid"
+                    
+                }
+            ],
+            "nextQuestion": [
+                {
+                    "awnserMatch": ["a1"],
+                    "questionId": "q3"
                 }
             ]
         },
@@ -42,25 +46,20 @@
             "alternatives": [
                 {
                     "id": "a1",
-                    "title": "Mars",
-                    "isAwnser": true,
-                    "weigth": 0.5
+                    "title": "Mars"
                 },
                 {
                     "id": "a2",
-                    "title": "Venus",
-                    "isAwnser": false
+                    "title": "Venus"
                 },
                 {
                     "id": "a3",
-                    "title": "Jupiter",
-                    "isAwnser": true,
-                    "weigth": 0.5
+                    "title": "Jupiter"
                 },
                 {
                     "id": "a4",
-                    "title": "Saturn",
-                    "isAwnser": false
+                    "title": "Saturn"
+                    
                 }
             ]
         },
@@ -70,10 +69,15 @@
             "imageSource": "",
             "description": "",
             "difficulty": "medium",
-            "type": "input_question",
-            "awnserKeywords": [
-                "Elephant"
-            ]
+            "type": "input_question"
+        },
+        {
+            "id": "q4",
+            "title": "What is the shrotest mammal in the world?",
+            "imageSource": "",
+            "description": "",
+            "difficulty": "medium",
+            "type": "input_question"
         }
     ]
 }
