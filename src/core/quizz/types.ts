@@ -7,6 +7,7 @@ export enum QuizzQuestionTypeEnum {
 export interface Quizz {
     id: string;
     title: string;
+    description?: string;
     tumbImage: string;
     questions: QuizzQuestion[]
 }

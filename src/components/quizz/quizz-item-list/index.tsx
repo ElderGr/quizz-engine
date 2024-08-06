@@ -3,7 +3,7 @@ import { Quizz } from "../../../core/quizz/types";
 import { useDispatch } from "react-redux";
 import { selectQuizz } from "../../../core/quizz/state/actions";
 import { AiOutlineRight } from 'react-icons/ai'
-import { Container } from "./styles";
+import { Container, Subtitle, Title } from "./styles";
 
 interface QuizzItemListProps {
     item: Quizz;
@@ -22,8 +22,11 @@ export function QuizzItemList({
             }} 
             key={item.id}
         >
-            <div>{item.title}</div>
-            <AiOutlineRight />
+            <div>
+                <Title>{item.title}</Title>
+                <Subtitle>{item.description}</Subtitle>
+            </div>
+            <AiOutlineRight size={15} />
         </Container>
     );
 }

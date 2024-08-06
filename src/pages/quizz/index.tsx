@@ -4,6 +4,9 @@ import { useState } from "react"
 import { QuizzQuestionAlternative, QuizzQuestionTypeEnum } from "../../core/quizz/types"
 import { confirmAnswer } from "../../core/quizz/state/actions"
 import { useNavigate } from "react-router"
+import { Container } from "../../components/container"
+import { Button } from "../../components/button"
+import { OneChoiseAlternative } from "../../components/quizz/one-choice-alternative"
 
 const renderQuizzAlternative = {
     [QuizzQuestionTypeEnum.ONE_CHOISE]: (
@@ -13,16 +16,12 @@ const renderQuizzAlternative = {
     ) => (
         <div>
             {alternatives.map((alternative) => (
-                <>
-                <input 
-                    type='radio'
-                    id={`alternative-${alternative.id}`}
-                    name="alternatives"
-                    onChange={() => onSelect([alternative.id])}
-                    checked={selectedAlternative[0] === alternative.id}
-                />
-                <label htmlFor={`alternative-${alternative.id}`}>{alternative.title}</label>
-                </>
+               <OneChoiseAlternative  
+                   alternative={alternative}
+                   selectedAlternative={selectedAlternative}
+                   onSelect={onSelect}
+                   key={alternative.id}
+               />
             ))}
         </div>
     ),
@@ -93,11 +92,16 @@ export function QuizzPage() {
     }
 
     return (
-        <div>
-            <h1>Quizz Page</h1>
+        <Container>
+            <h1>{selectedQuizz.title}</h1>
+            <h2>{selectedQuizz.description}</h2>
             <div>
                 <div>{question?.title}</div>
-                <img src={question?.imageSource} />
+                <img 
+                    src={question?.imageSource}
+                    width={400}
+                    height={400}
+                />
                 <div>{question?.description}</div>
 
                 <div>
@@ -112,9 +116,11 @@ export function QuizzPage() {
                     }
                 </div>
                 <div>
-                    <button onClick={onNextQuestion}>next question</button>
+                    <Button onClick={onNextQuestion}>
+                        Next question
+                    </Button>
                 </div>
             </div>
-        </div>
+        </Container>
     )
 }
